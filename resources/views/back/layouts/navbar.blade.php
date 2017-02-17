@@ -3,7 +3,7 @@
 		<div class="container-fluid">
 			<a href="#" class="brand">
 				<small>
-					<i class="icon-leaf"></i>
+					<i class="icon-desktop"></i>
 					Inventario
 				</small>
 				</a><!--/.brand-->
@@ -51,7 +51,7 @@
 						<li class="divider"></li>
 						<li>
 							<a href="#">
-								<i class="icon-off"></i>
+								<i class="icon-signout"></i>
 								Salir
 							</a>
 						</li>

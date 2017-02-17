@@ -34,7 +34,7 @@
 			</a>
 			@include('back.layouts.sidebar')
 			<div class="main-content">
-				@include('back.layouts.breadcrumbs')
+				{{-- @include('back.layouts.breadcrumbs') --}}
 				<div class="page-content">
 					<div class="row-fluid">
 						<div class="span12">
@@ -45,7 +45,7 @@
 						</div><!--/.span-->
 					</div><!--/.row-fluid-->
 				</div><!--/.page-content-->
-				@include('back.layouts.configuration')
+				{{-- @include('back.layouts.configuration') --}}
 			</div><!--/.main-content-->
 		</div><!--/.main-container-->
 		<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-small btn-inverse">
