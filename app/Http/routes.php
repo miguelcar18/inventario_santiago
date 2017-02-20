@@ -33,4 +33,7 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::resource('clientes', 'back\ClienteController');
 	Route::resource('productos', 'back\ProductoController');
 	Route::get('/imagenProducto/{id}', ['as' => 'imagenproducto', 'uses' => 'back\ProductoController@cambiarImagenEditar']);
+	Route::resource('inventario', 'back\InventarioController');
+	Route::resource('ventas', 'back\VentaController');
+	Route::get('/selectProducto/{id}', ['as' => 'selectproducto', 'uses' => 'back\InventarioController@totalProductoSeleccionado']);
 });

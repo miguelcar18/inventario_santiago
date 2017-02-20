@@ -50,19 +50,40 @@
 		</li>
 		<li>
 			<a href="#" class="dropdown-toggle">
+				<i class="icon-book"></i>
+				<span class="menu-text"> Inventario </span>
+				<b class="arrow icon-angle-down"></b>
+			</a>
+			<ul class="submenu">
+				<li>
+					<a href="{{ URL::route('dashboard.inventario.index') }}">
+						<i class="icon-double-angle-right"></i>
+						Listado de registros
+					</a>
+				</li>
+				<li>
+					<a href="{{ URL::route('dashboard.inventario.create') }}">
+						<i class="icon-double-angle-right"></i>
+						Agregar registro
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="#" class="dropdown-toggle">
 				<i class="icon-money"></i>
 				<span class="menu-text"> Ventas </span>
 				<b class="arrow icon-angle-down"></b>
 			</a>
 			<ul class="submenu">
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.ventas.index') }}">
 						<i class="icon-double-angle-right"></i>
 						Ventas realizadas
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.ventas.create') }}">
 						<i class="icon-double-angle-right"></i>
 						Registrar venta
 					</a>
@@ -89,12 +110,6 @@
 					</a>
 				</li>
 			</ul>
-		</li>
-		<li>
-			<a href="#">
-				<i class="icon-book"></i>
-				<span class="menu-text"> Inventario </span>
-			</a>
 		</li>
 		<li>
 			<a href="#">

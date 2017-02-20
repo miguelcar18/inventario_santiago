@@ -534,3 +534,231 @@ $('form#productoForm').validate({
     invalidHandler: function (form) {
     }
 });
+
+$('form#inventarioForm').validate({
+    errorElement: 'span',
+    errorClass: 'help-inline',
+    focusInvalid: false,
+    rules: {
+        producto: {
+            required: true
+        },
+        cantidad: {
+            required: true,
+            number: true
+        }
+    },
+    messages: {
+        producto: "Seleccione un producto",
+        cantidad: {
+            required: "Ingrese una cantidad",
+            number: "Ingrese solo números"
+        }
+    },
+    invalidHandler: function (event, validator) { //display error alert on form submit   
+        $('.alert-error', $('.login-form')).show();
+    },
+
+    highlight: function (e) {
+        $(e).closest('.control-group').removeClass('info').addClass('error');
+    },
+
+    success: function (e) {
+        $(e).closest('.control-group').removeClass('error').addClass('success');
+        $(e).remove();
+    },
+    errorPlacement: function (error, element) {
+        if(element.is(':checkbox') || element.is(':radio')) {
+            var controls = element.closest('.controls');
+            if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+            else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+        }
+        else if(element.is('.select2')) {
+            error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+        }
+        else if(element.is('.chzn-select')) {
+            error.insertAfter(element.siblings('[class*="chzn-container"]:eq(0)'));
+        }
+        else error.insertAfter(element);
+    },
+    submitHandler: function (form) {
+        var accion = '';
+        if($("button#inventarioSubmit").attr('data') == 1)
+        {
+            accion = 'agregado';
+        }
+        else if($("button#inventarioSubmit").attr('data') == 0)
+        {
+            accion = 'actualizado';
+        }
+        var token = $("input[name=_token]").val();
+        var formData = new FormData($("form#inventarioForm")[0]);
+        $.ajax({
+            url:  $("form#inventarioForm").attr('action'),
+            type: $("form#inventarioForm").attr('method'),
+            headers: {'X-CSRF-TOKEN' : token},
+            data: new FormData($("form#inventarioForm")[0]),
+            processData: false,
+            contentType: false,
+            beforeSend:function(){
+                $("button#inventarioSubmit").button('loading');
+                $("button#cancelar").addClass('disabled');
+            },
+            success:function(respuesta){
+                $.gritter.add({
+                    title: 'Registrado',
+                    text: 'Registro '+accion+' satisfactoriamente.',
+                    class_name: 'gritter-success'
+                });
+                if($("button#inventarioSubmit").attr('data') == 1)
+                {
+                    $('form#inventarioForm').reset();
+                    $('div.control-group').removeClass('success');
+                }
+                $("button#inventarioSubmit").button('reset');
+                $("button#cancelar").removeClass('disabled');
+            }
+        })
+        return false;
+    },
+    invalidHandler: function (form) {
+    }
+});
+
+$("select#producto").on("change", function(){
+    var selectInventario = $(this);
+    var valor = $(this).val();
+    if(valor != "")
+    {
+        var url = 'http://'+window.location.host+"/inventario/public";
+        $.ajax({
+            url: url + '/dashboard/selectProducto/' + valor,
+            method: "GET",
+            data: { _token: $('input[name=token]').val() },
+            dataType: 'json',
+            success: function(respuesta){
+                if(respuesta.correcto){
+                    $('#limite').val(respuesta.total);
+                }
+                else
+                {
+                    console.log('Sin exito');
+                }
+            },
+            error: function(jqXHR, textStatus, errorThrown){
+                if(jqXHR){
+                    console.log(jqXHR);
+                }
+            }
+        });
+    }
+    else
+    {
+        $('#limite').val("");
+    }
+}).change();
+
+$('form#ventaForm').validate({
+    errorElement: 'span',
+    errorClass: 'help-inline',
+    focusInvalid: false,
+    rules: {
+        cliente: {
+            required: true
+        },
+        producto: {
+            required: true
+        },
+        cantidad: {
+            required: true,
+            number: true
+        }
+    },
+    messages: {
+        cliente: "Seleccione un cliente",
+        producto: "Seleccione un producto",
+        cantidad: {
+            required: "Ingrese una cantidad",
+            number: "Ingrese solo números"
+        }
+    },
+    invalidHandler: function (event, validator) { //display error alert on form submit   
+        $('.alert-error', $('.login-form')).show();
+    },
+
+    highlight: function (e) {
+        $(e).closest('.control-group').removeClass('info').addClass('error');
+    },
+
+    success: function (e) {
+        $(e).closest('.control-group').removeClass('error').addClass('success');
+        $(e).remove();
+    },
+    errorPlacement: function (error, element) {
+        if(element.is(':checkbox') || element.is(':radio')) {
+            var controls = element.closest('.controls');
+            if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
+            else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
+        }
+        else if(element.is('.select2')) {
+            error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
+        }
+        else if(element.is('.chzn-select')) {
+            error.insertAfter(element.siblings('[class*="chzn-container"]:eq(0)'));
+        }
+        else error.insertAfter(element);
+    },
+    submitHandler: function (form) {
+        var accion = '';
+        if($("button#ventaSubmit").attr('data') == 1)
+        {
+            accion = 'agregada';
+        }
+        else if($("button#ventaSubmit").attr('data') == 0)
+        {
+            accion = 'actualizada';
+        }
+        var token = $("input[name=_token]").val();
+        var formData = new FormData($("form#ventaForm")[0]);
+        if(parseInt($('#cantidad').val()) <= parseInt($('#limite').val()))
+        {
+            $.ajax({
+                url:  $("form#ventaForm").attr('action'),
+                type: $("form#ventaForm").attr('method'),
+                headers: {'X-CSRF-TOKEN' : token},
+                data: new FormData($("form#ventaForm")[0]),
+                processData: false,
+                contentType: false,
+                beforeSend:function(){
+                    $("button#ventaSubmit").button('loading');
+                    $("button#cancelar").addClass('disabled');
+                },
+                success:function(respuesta){
+                    $.gritter.add({
+                        title: 'Registrado',
+                        text: 'Vente '+accion+' satisfactoriamente.',
+                        class_name: 'gritter-success'
+                    });
+                    if($("button#ventaSubmit").attr('data') == 1)
+                    {
+                        $('form#ventaForm').reset();
+                        $('div.control-group').removeClass('success');
+                    }
+                    $("button#ventaSubmit").button('reset');
+                    $("button#cancelar").removeClass('disabled');
+                }
+            })
+        }
+        else if(parseInt($('#cantidad').val()) > parseInt($('#limite').val()))
+        {
+            $.gritter.add({
+                title: 'Advertencia',
+                text: 'La cantidad ingresada supera la registrada en inventario.',
+                class_name: 'gritter-warning'
+            });
+        }
+        return false;
+    },
+    invalidHandler: function (form) {
+    }
+});
