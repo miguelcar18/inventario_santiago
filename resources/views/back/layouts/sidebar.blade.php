@@ -1,31 +1,4 @@
 <div class="sidebar" id="sidebar">
-	{{--
-	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
-		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-			<button class="btn btn-small btn-success">
-				<i class="icon-signal"></i>
-			</button>
-			<button class="btn btn-small btn-info">
-				<i class="icon-pencil"></i>
-			</button>
-			<button class="btn btn-small btn-warning">
-				<i class="icon-group"></i>
-			</button>
-			<button class="btn btn-small btn-danger">
-				<i class="icon-cogs"></i>
-			</button>
-		</div>
-		<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-			<span class="btn btn-success"></span>
-
-			<span class="btn btn-info"></span>
-
-			<span class="btn btn-warning"></span>
-
-			<span class="btn btn-danger"></span>
-		</div>
-	</div><!--#sidebar-shortcuts-->
-	--}}
 	<ul class="nav nav-list">
 		<li>
 			<a href="#">
@@ -41,13 +14,13 @@
 			</a>
 			<ul class="submenu">
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.clientes.index') }}">
 						<i class="icon-double-angle-right"></i>
 						Listado de clientes
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.clientes.create') }}">
 						<i class="icon-double-angle-right"></i>
 						Agregar cliente
 					</a>
@@ -62,13 +35,13 @@
 			</a>
 			<ul class="submenu">
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.productos.index') }}">
 						<i class="icon-double-angle-right"></i>
 						Listado de productos
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.productos.create') }}">
 						<i class="icon-double-angle-right"></i>
 						Agregar producto
 					</a>
@@ -104,13 +77,13 @@
 			</a>
 			<ul class="submenu">
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.usuarios.index') }}">
 						<i class="icon-double-angle-right"></i>
 						Listado de usuarios
 					</a>
 				</li>
 				<li>
-					<a href="#">
+					<a href="{{ URL::route('dashboard.usuarios.create') }}">
 						<i class="icon-double-angle-right"></i>
 						Agregar usuario
 					</a>
@@ -130,7 +103,7 @@
 			</a>
 		</li>
 		<li>
-			<a href="#">
+			<a href="{{ URL::route('logout') }}">
 				<i class="icon-signout"></i>
 				<span class="menu-text"> Cerrar sesión </span>
 			</a>

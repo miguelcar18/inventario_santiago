@@ -6,9 +6,28 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Clientes;
+use Session;
+use App;
+use Auth;
+use Carbon\Carbon;
+use Illuminate\Routing\Route;
+use Input;
+use Redirect;
+use Response;
 
 class ClienteController extends Controller
 {
+    public function __construct(){
+        //middleware para autorizar acciones
+        $this->middleware('auth');
+        $this->beforeFilter('@find');
+    }
+
+    public function find(Route $route){
+        $this->cliente = Clientes::find($route->getParameter('clientes'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +35,8 @@ class ClienteController extends Controller
      */
     public function index()
     {
-        //
+        $clientes = Clientes::All();
+        return view('back.clientes.index', compact('clientes'));
     }
 
     /**
@@ -26,7 +46,7 @@ class ClienteController extends Controller
      */
     public function create()
     {
-        //
+        return view('back.clientes.new');
     }
 
     /**
@@ -37,7 +57,20 @@ class ClienteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($request->ajax())
+        {
+            $campos = [
+                'nombre'    => $request['nombre'], 
+                'apellido'  => $request['apellido'], 
+                'cedula'    => $request['cedula'],
+                'telefono'  => $request['telefono'],
+                'correo'    => $request['correo']
+            ];
+            Clientes::create($campos);
+            return response()->json([
+                'nuevoContenido' => $request->all()
+            ]);
+        }
     }
 
     /**
@@ -48,7 +81,7 @@ class ClienteController extends Controller
      */
     public function show($id)
     {
-        //
+        return view('back.clientes.show', ['cliente' => $this->cliente]);
     }
 
     /**
@@ -59,7 +92,7 @@ class ClienteController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('back.clientes.edit', ['cliente' => $this->cliente]);
     }
 
     /**
@@ -71,7 +104,21 @@ class ClienteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if($request->ajax())
+        {
+            $campos = [
+                'nombre'    => $request['nombre'], 
+                'apellido'  => $request['apellido'], 
+                'cedula'    => $request['cedula'],
+                'telefono'  => $request['telefono'],
+                'correo'    => $request['correo']
+            ];
+            $this->cliente->fill($campos);
+            $this->cliente->save();
+            return response()->json([
+                'nuevoContenido' => $campos           
+            ]);
+        }
     }
 
     /**
@@ -82,6 +129,22 @@ class ClienteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        if (is_null ($this->cliente))
+            \App::abort(404);
+        $this->cliente->delete();
+        if (\Request::ajax())
+        {
+            return Response::json(array (
+                'success' => true,
+                'msg'     => 'Cliente "' . $this->cliente->nombre . ' '. $this->cliente->apellido .'" eliminado satisfactoriamente',
+                'id'      => $this->cliente->id
+            ));
+        }
+        else
+        {
+            $mensaje = 'Cliente "'.$this->cliente->nombre.'"  '. $this->cliente->apellido .'" eliminado satisfactoriamente';
+            Session::flash('message-alert', $mensaje);
+            return Redirect::route('dashboard.clientes.index');
+        }
     }
 }

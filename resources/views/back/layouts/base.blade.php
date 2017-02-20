@@ -2,7 +2,9 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+		@section('titulo')
 		<title>Sistema de inventario</title>
+		@show
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!--basic styles-->
@@ -19,6 +21,7 @@
 		<link rel="stylesheet" href="{{ asset('back/assets/css/ace.min.css') }}" />
 		<link rel="stylesheet" href="{{ asset('back/assets/css/ace-responsive.min.css') }}" />
 		<link rel="stylesheet" href="{{ asset('back/assets/css/ace-skins.min.css') }}" />
+		<link rel="stylesheet" href="{{ asset('back/assets/css/jquery.gritter.css') }}" />
 		<!--[if lte IE 8]>
 		<link rel="stylesheet" href="{{ asset('back/assets/css/ace-ie.min.css') }}" />
 		<![endif]-->
@@ -53,14 +56,8 @@
 		</a>
 		<!--basic scripts-->
 		<!--[if !IE]>-->
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-		<!--<![endif]-->
-		<!--[if IE]>
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<![endif]-->
-		<!--[if !IE]>-->
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{{ asset('back/assets/js/jquery-2.0.3.min.js') }}'>"+"<"+"/script>");
+			window.jQuery || document.write("<script src='{{ asset('back/assets/js/jquery-2.0.3.js') }}'>"+"<"+"/script>");
 		</script>
 		<!--<![endif]-->
 		<!--[if IE]>
@@ -73,9 +70,12 @@
 		</script>
 		<script src="{{ asset('back/assets/js/bootstrap.min.js') }}"></script>
 		<!--page specific plugin scripts-->
+		<script src="{{ asset('back/assets/js/jquery.gritter.min.js') }}"></script>
 		<!--ace scripts-->
+		<script src="{{ asset('back/assets/js/jquery.validate.min.js') }}"></script>
 		<script src="{{ asset('back/assets/js/ace-elements.min.js') }}"></script>
 		<script src="{{ asset('back/assets/js/ace.min.js') }}"></script>
+		<script src="{{ asset('back/assets/js/formularios/custom.js') }}"></script>
 		<!--inline scripts related to this page-->
 		@section('javascripts')@show
 	</body>

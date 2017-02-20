@@ -53,6 +53,11 @@ return [
             'root' => public_path().'/uploads/usuarios',
         ],
 
+        'productos' => [
+            'driver' => 'local',
+            'root' => public_path().'/uploads/productos',
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',

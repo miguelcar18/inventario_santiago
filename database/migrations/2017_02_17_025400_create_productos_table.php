@@ -17,7 +17,7 @@ class CreateProductosTable extends Migration
             $table->string('nombre');
             //$table->string('codigo');
             $table->double('precioCosto');
-            $table->double('precio_venta');
+            $table->double('precioVenta');
             $table->string('path');
             $table->timestamps();
         });
