@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Inventario;
 use App\Productos;
+use App\Ventas;
 use Session;
 use App;
 use Auth;
@@ -36,8 +37,9 @@ class InventarioController extends Controller
      */
     public function index()
     {
+        $productos  = Productos::all();
         $inventario = Inventario::All();
-        return view('back.inventario.index', compact('inventario'));
+        return view('back.inventario.index', compact('inventario', 'productos'));
     }
 
     /**
@@ -129,20 +131,52 @@ class InventarioController extends Controller
         if (is_null ($this->inventario))
             \App::abort(404);
 
-        $this->inventario->delete();
+        $productoInventario = Inventario::where('producto', $this->inventario->producto)->get();
+        $productoVentas = Ventas::where('producto', $this->inventario->producto)->get();
+        $totalInventario = 0;
+        $totalVentas = 0;
+        $total = 0;
+        foreach ($productoInventario as $data) {
+            $totalInventario = $totalInventario + $data->cantidad;
+        }
+        foreach ($productoVentas as $data) {
+        $totalVentas = $totalVentas + $data->cantidad;
+        }
+        $total = $totalInventario - $totalVentas - $this->inventario->cantidad;
 
         if (\Request::ajax())
         {
-            return Response::json(array (
-                'success' => true,
-                'msg'     => 'Registro "' . $this->inventario->id . '" eliminado satisfactoriamente',
-                'id'      => $this->inventario->id
-            ));
+            if($total >= 0)
+            {
+                $this->inventario->delete();
+                return Response::json(array (
+                    'success' => true,
+                    'msg'     => 'Registro "' . $this->inventario->id . '" eliminado satisfactoriamente',
+                    'id'      => $this->inventario->id
+                ));
+            }
+            else if($total < 0)
+            {
+                return Response::json(array (
+                    'error' => true,
+                    'msg'     => 'No se puede eliminar porque existen ventas asociadas a este producto',
+                    'id'      => $this->inventario->id
+                ));
+            }
         }
         else
         {
-            $mensaje = 'Registro "'.$this->inventario->id.'" eliminado satisfactoriamente';
-            Session::flash('message-alert', $mensaje);
+            if($total >= 0)
+            {
+                $this->inventario->delete();
+                $mensaje = 'Registro "'.$this->inventario->id.'" eliminado satisfactoriamente';
+                Session::flash('message-alert', $mensaje);
+            }
+            else if($total < 0)
+            {
+                $mensaje = 'No se puede eliminar porque existen ventas asociadas a este producto';
+                Session::flash('message-error', $mensaje);
+            }
             return Redirect::route('dashboard.inventario.index');
         }
     }
@@ -151,14 +185,38 @@ class InventarioController extends Controller
     {
         if($request->ajax()){
             $productoInventario = Inventario::where('producto', $id)->get();
+            $productoVentas = Ventas::where('producto', $id)->get();
+            $totalInventario = 0;
+            $totalVentas = 0;
             $total = 0;
             foreach ($productoInventario as $data) {
-                $total = $total + $data->cantidad;
+                $totalInventario = $totalInventario + $data->cantidad;
             }
+            foreach ($productoVentas as $data) {
+                $totalVentas = $totalVentas + $data->cantidad;
+            }
+            $total = $totalInventario - $totalVentas;
             return Response::json(array(
                 'correcto'  =>  true,
                 'total'     =>  $total
             ));
         }
+    }
+
+    public function totalCantidad($id) 
+    {
+        $productoInventario = Inventario::where('producto', $id)->get();
+        $productoVentas = Ventas::where('producto', $id)->get();
+        $totalInventario = 0;
+        $totalVentas = 0;
+        $total = 0;
+        foreach ($productoInventario as $data) {
+            $totalInventario = $totalInventario + $data->cantidad;
+        }
+        foreach ($productoVentas as $data) {
+            $totalVentas = $totalVentas + $data->cantidad;
+        }
+        $total = $totalInventario - $totalVentas;
+        return $total;
     }
 }

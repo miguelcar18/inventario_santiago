@@ -1,10 +1,12 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Datos del registro | Sistema de inventario</title>
+    <title>Datos del registro | Panel OGM</title>
 @stop
 
 @section('contenido')
+    @inject('InventarioController', 'App\Http\Controllers\back\InventarioController')
+    {{--*/ $cantidadTotal = $InventarioController->totalCantidad($inventario->producto) /*--}}
 	@include('back.layouts.encabezadoContenido', ['titulo' => 'Inventario', 'subtitulo' => 'datos detallados'])
     {!! Form::open(['route' => ['dashboard.inventario.destroy', $inventario->id], 'method' =>'DELETE', 'id' => 'form-eliminar-inventario', 'onSubmit' => 'return confirm(\'\\u00bfEst\\u00e1 realmente seguro(a) de eliminar este registro?\')']) !!}
 
@@ -21,6 +23,10 @@
             <tr>
                 <th>Cantidad</th>
                 <td>{{ $inventario->cantidad }}</td>
+            </tr>
+            <tr>
+                <th>Cantidad total en inventario</th>
+                <td>{{ $cantidadTotal }}</td>
             </tr>
             <tr>
                 <th>Acciones</th>

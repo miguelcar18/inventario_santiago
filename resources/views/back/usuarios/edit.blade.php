@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Editar usuario | Sistema de inventario</title>
+    <title>Editar usuario | Panel OGM</title>
 @stop
 
 @section('contenido')

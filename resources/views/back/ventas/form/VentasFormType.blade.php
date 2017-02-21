@@ -34,7 +34,7 @@
 	<label class="control-label" for="cantidad">Apartar:</label>
 	<div class="controls">
 		<div class="span12">
-			{!! Form::checkbox('apartar', 1, false, $attributes = array('id' => 'apartar', 'class' => 'ace-switch')) !!}
+			{!! Form::checkbox('apartar', null, false, $attributes = array('id' => 'apartar', 'class' => 'ace-switch')) !!}
 			<span class="lbl"></span>
 		</div>
 	</div>

@@ -1,49 +1,53 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Listado de registros | Sistema de inventario</title>
+    <title>Listado de registros | Panel OGM</title>
 @stop
 
 @section('contenido')
     @include('back.layouts.encabezadoContenido', ['titulo' => 'Inventario', 'subtitulo' => 'Listado'])
 
-	<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Producto</th>
-                <th>Cantidad</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-        @foreach($inventario as $inventari)
-            <tr>
-                <td><a href="#">{{ $inventari->id }}</a></td>
-                <td>{{ $inventari->nombreProducto->nombre }}</td>
-                <td>{{ $inventari->cantidad }}</td>
-                <td class="hidden-480">
-                    <a href="{{ URL::route('dashboard.inventario.show', $inventari->id) }}" data-rel="tooltip" title="Mostrar {{ $inventari->id }}" objeto="{{ $inventari->id }}" style="text-decoration:none;"> 
-                        <span class="btn btn-mini btn-info"> <i class="icon-eye-open bigger-120"></i> </span> 
-                    </a>
-                    &nbsp;
-                    <a href="{{ URL::route('dashboard.inventario.edit', $inventari->id) }}" class="tooltip-success editar" data-rel="tooltip" title="Editar {{ $inventari->id }}" objeto="{{ $inventari->id }}" style="text-decoration:none;"> 
-                        <span class="btn btn-mini btn-success"> <i class="icon-pencil bigger-120"></i> </span> 
-                    </a>
-                    &nbsp;
-                    <a href="#" data-id="{{ $inventari->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Eliminar {{ $inventari->id }}" objeto="{{ $inventari->id }}"> 
-                        <span class="btn btn-mini btn-danger"> <i class="icon-remove bigger-120"></i> </span> 
-                    </a>
-                </td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    @if(count($productos) > 0)
+    	<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach($inventario as $inventari)
+                <tr>
+                    <td><a href="#">{{ $inventari->id }}</a></td>
+                    <td>{{ $inventari->nombreProducto->nombre }}</td>
+                    <td>{{ $inventari->cantidad }}</td>
+                    <td class="hidden-480">
+                        <a href="{{ URL::route('dashboard.inventario.show', $inventari->id) }}" data-rel="tooltip" title="Mostrar {{ $inventari->id }}" objeto="{{ $inventari->id }}" style="text-decoration:none;"> 
+                            <span class="btn btn-mini btn-info"> <i class="icon-eye-open bigger-120"></i> </span> 
+                        </a>
+                        &nbsp;
+                        <a href="{{ URL::route('dashboard.inventario.edit', $inventari->id) }}" class="tooltip-success editar" data-rel="tooltip" title="Editar {{ $inventari->id }}" objeto="{{ $inventari->id }}" style="text-decoration:none;"> 
+                            <span class="btn btn-mini btn-success"> <i class="icon-pencil bigger-120"></i> </span> 
+                        </a>
+                        &nbsp;
+                        <a href="#" data-id="{{ $inventari->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Eliminar {{ $inventari->id }}" objeto="{{ $inventari->id }}"> 
+                            <span class="btn btn-mini btn-danger"> <i class="icon-remove bigger-120"></i> </span> 
+                        </a>
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
 
-    {{-- [[ $users->render() ]] --}}
+        {{-- [[ $users->render() ]] --}}
 
-    {!! Form::open(array('route' => array('dashboard.inventario.destroy', 'USER_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-delete')) !!}
-    {!! Form::close() !!}
+        {!! Form::open(array('route' => array('dashboard.inventario.destroy', 'USER_ID'), 'method' => 'DELETE', 'role' => 'form', 'id' => 'form-delete')) !!}
+        {!! Form::close() !!}
+    @elseif(count($productos) == 0)
+        @include('back.layouts.tablaVacia', ['mensaje' => 'Debe de registrar al menos un producto'])
+    @endif
 @stop
 
 @section('javascripts')
@@ -135,6 +139,15 @@
                 title: 'Eliminado',
                 text: messageAlert.replace('&quot;', '"'),
                 class_name: 'gritter-success'
+            });
+        @endif
+
+        @if(Session::has('message-error'))
+            var messageAlert = "{{ Session::get('message-error') }}";
+            $.gritter.add({
+                title: 'Error',
+                text: messageAlert.replace('&quot;', '"'),
+                class_name: 'gritter-error'
             });
         @endif
     </script>

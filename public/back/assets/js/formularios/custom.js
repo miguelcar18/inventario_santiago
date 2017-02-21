@@ -51,7 +51,7 @@ $('form#loginForm').validate({
                 }
                 else
                 {
-                    window.location = 'http://'+window.location.host+"/inventario/public/";
+                    window.location = 'http://'+window.location.host+"/ogm/public/";
                 }
             }
         })            
@@ -255,7 +255,7 @@ $('form#usuarioEditForm').validate({
                 {
                     $("button#usuarioSubmit").button('reset');
                     $("button#cancelar").removeClass('disabled');
-                    var url = 'http://'+window.location.host+"/inventario/public";
+                    var url = 'http://'+window.location.host+"/ogm/public";
                     $.ajax({
                         url: url + '/dashboard/imagenUsuario/' + respuesta.nuevoContenido.id,
                         method: "GET",
@@ -501,7 +501,7 @@ $('form#productoForm').validate({
                 }
                 else if($("button#productoSubmit").attr('data') == 0)
                 {
-                    var url = 'http://'+window.location.host+"/inventario/public";
+                    var url = 'http://'+window.location.host+"/ogm/public";
                     $.ajax({
                         url: url + '/dashboard/imagenProducto/' + respuesta.nuevoContenido.id,
                         method: "GET",
@@ -630,7 +630,7 @@ $("select#producto").on("change", function(){
     var valor = $(this).val();
     if(valor != "")
     {
-        var url = 'http://'+window.location.host+"/inventario/public";
+        var url = 'http://'+window.location.host+"/ogm/public";
         $.ajax({
             url: url + '/dashboard/selectProducto/' + valor,
             method: "GET",
@@ -722,32 +722,68 @@ $('form#ventaForm').validate({
         var formData = new FormData($("form#ventaForm")[0]);
         if(parseInt($('#cantidad').val()) <= parseInt($('#limite').val()))
         {
-            $.ajax({
-                url:  $("form#ventaForm").attr('action'),
-                type: $("form#ventaForm").attr('method'),
-                headers: {'X-CSRF-TOKEN' : token},
-                data: new FormData($("form#ventaForm")[0]),
-                processData: false,
-                contentType: false,
-                beforeSend:function(){
-                    $("button#ventaSubmit").button('loading');
-                    $("button#cancelar").addClass('disabled');
-                },
-                success:function(respuesta){
-                    $.gritter.add({
-                        title: 'Registrado',
-                        text: 'Vente '+accion+' satisfactoriamente.',
-                        class_name: 'gritter-success'
-                    });
-                    if($("button#ventaSubmit").attr('data') == 1)
-                    {
-                        $('form#ventaForm').reset();
-                        $('div.control-group').removeClass('success');
+            if($('#apartar').is(':checked'))
+            {
+                $.ajax({
+                    url:  $("form#ventaForm").attr('action'),
+                    type: $("form#ventaForm").attr('method'),
+                    headers: {'X-CSRF-TOKEN' : token},
+                    data: new FormData($("form#ventaForm")[0]),
+                    processData: false,
+                    contentType: false,
+                    beforeSend:function(){
+                        $("button#ventaSubmit").button('loading');
+                        $("button#cancelar").addClass('disabled');
+                    },
+                    success:function(respuesta){
+                        $.gritter.add({
+                            title: 'Registrado',
+                            text: 'Vente '+accion+' satisfactoriamente.',
+                            class_name: 'gritter-success'
+                        });
+                        if($("button#ventaSubmit").attr('data') == 1)
+                        {
+                            $('form#ventaForm').reset();
+                            $('div.control-group').removeClass('success');
+                        }
+                        $("button#ventaSubmit").button('reset');
+                        $("button#cancelar").removeClass('disabled');
                     }
-                    $("button#ventaSubmit").button('reset');
-                    $("button#cancelar").removeClass('disabled');
+                })
+            }
+            else if(!$('#apartar').is(':checked'))
+            {
+                if(confirm("¿Esta seguro/a de los datos ingresados? Esta acción no se puede deshacer"))
+                {
+                    $.ajax({
+                        url:  $("form#ventaForm").attr('action'),
+                        type: $("form#ventaForm").attr('method'),
+                        headers: {'X-CSRF-TOKEN' : token},
+                        data: new FormData($("form#ventaForm")[0]),
+                        processData: false,
+                        contentType: false,
+                        beforeSend:function(){
+                            $("button#ventaSubmit").button('loading');
+                            $("button#cancelar").addClass('disabled');
+                        },
+                        success:function(respuesta){
+                            $.gritter.add({
+                                title: 'Registrado',
+                                text: 'Vente '+accion+' satisfactoriamente.',
+                                class_name: 'gritter-success'
+                            });
+                            if($("button#ventaSubmit").attr('data') == 1)
+                            {
+                                $('form#ventaForm').reset();
+                                $('div.control-group').removeClass('success');
+                            }
+                            $("button#ventaSubmit").button('reset');
+                            $("button#cancelar").removeClass('disabled');
+                        }
+                    })
                 }
-            })
+            }
+                    
         }
         else if(parseInt($('#cantidad').val()) > parseInt($('#limite').val()))
         {

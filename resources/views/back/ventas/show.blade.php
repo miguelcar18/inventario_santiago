@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Datos de la venta | Sistema de inventario</title>
+    <title>Datos de la venta | Panel OGM</title>
 @stop
 
 @section('contenido')
@@ -36,6 +36,7 @@
                     @endif
                 </td>
             </tr>
+            @if($venta->apartar == 1)
             <tr>
                 <th>Acciones</th>
                 <td>
@@ -53,6 +54,7 @@
                     </a>
                 </td>
             </tr>
+            @endif
         </tbody>
     </table>
     {!! Form::close() !!}

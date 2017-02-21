@@ -38,8 +38,10 @@ class VentaController extends Controller
      */
     public function index()
     {
+        $clientes = Clientes::All();
+        $inventario = Inventario::All();
         $ventas = Ventas::All();
-        return view('back.ventas.index', compact('ventas'));
+        return view('back.ventas.index', compact('ventas','clientes','inventario'));
     }
 
     /**

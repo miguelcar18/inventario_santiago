@@ -12,9 +12,8 @@
 */
 
 /***********************Inicio***********************/
-Route::get('/', function(){
-	return Redirect::route('dashboard');
-});
+Route::get('/', ['as' => 'principal', 'uses' => 'front\FrontController@index']);
+Route::get('/nosotros', ['as' => 'nosotros', 'uses' => 'front\FrontController@nosotros']);
 
 /***********************Login y User***********************/
 Route::resource('login', 'back\LoginController');

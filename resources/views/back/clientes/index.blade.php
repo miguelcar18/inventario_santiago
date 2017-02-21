@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Listado de clientes | Sistema de inventario</title>
+    <title>Listado de clientes | Panel OGM</title>
 @stop
 
 @section('contenido')
@@ -32,10 +32,12 @@
                     <a href="{{ URL::route('dashboard.clientes.edit', $cliente->id) }}" class="tooltip-success editar" data-rel="tooltip" title="Editar {{ $cliente->nombre.' '.$cliente->apellido }}" objeto="{{ $cliente->nombre.' '.$cliente->apellido }}" style="text-decoration:none;"> 
                         <span class="btn btn-mini btn-success"> <i class="icon-pencil bigger-120"></i> </span> 
                     </a>
+                    {{--
                     &nbsp;
                     <a href="#" data-id="{{ $cliente->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Eliminar {{ $cliente->nombre.' '.$cliente->apellido }}" objeto="{{ $cliente->nombre.' '.$cliente->apellido }}"> 
                         <span class="btn btn-mini btn-danger"> <i class="icon-remove bigger-120"></i> </span> 
                     </a>
+                    --}}
                 </td>
             </tr>
         @endforeach

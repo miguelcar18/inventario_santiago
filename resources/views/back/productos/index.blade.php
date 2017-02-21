@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Listado de productos | Sistema de inventario</title>
+    <title>Listado de productos | Panel OGM</title>
 @stop
 
 @section('contenido')
@@ -56,7 +56,7 @@
         {
            $('.tooltip-error').click(function () {
 
-                var message = "¿Está realmente seguro(a) de eliminar este producto?";
+                var message = "¿Está realmente seguro(a) de eliminar este producto? También se eliminarán todas las ventas e inventarios asociados con este producto.";
                 var id = $(this).data('id');
                 var form = $('#form-delete');
                 var action = form.attr('action').replace('USER_ID', id);

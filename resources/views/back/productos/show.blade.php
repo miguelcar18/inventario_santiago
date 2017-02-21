@@ -1,12 +1,12 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Datos del producto | Sistema de inventario</title>
+    <title>Datos del producto | Panel OGM</title>
 @stop
 
 @section('contenido')
 	@include('back.layouts.encabezadoContenido', ['titulo' => 'Productos', 'subtitulo' => 'datos detallados'])
-    {!! Form::open(['route' => ['dashboard.productos.destroy', $producto->id], 'method' =>'DELETE', 'id' => 'form-eliminar-producto', 'onSubmit' => 'return confirm(\'\\u00bfEst\\u00e1 realmente seguro(a) de eliminar este producto?\')']) !!}
+    {!! Form::open(['route' => ['dashboard.productos.destroy', $producto->id], 'method' =>'DELETE', 'id' => 'form-eliminar-producto', 'onSubmit' => 'return confirm(\'\\u00bfEst\\u00e1 realmente seguro(a) de eliminar este producto? También se eliminarán todas las ventas e inventarios asociados con este producto.\')']) !!}
 
     <table id="sample-table-1" class="table table-striped table-bordered table-hover">
         <tbody>
@@ -49,7 +49,7 @@
                         </span>
                     </a>
                     &nbsp;
-                    <a href="javascript:{}" class="tooltip-error borrar" data-rel="tooltip" objeto="{{$producto->id}}" style="text-decoration:none;" onclick="return confirmSubmit(document.forms['form-eliminar-producto'], '¿Está realmente seguro de eliminar este producto?');">
+                    <a href="javascript:{}" class="tooltip-error borrar" data-rel="tooltip" objeto="{{$producto->id}}" style="text-decoration:none;" onclick="return confirmSubmit(document.forms['form-eliminar-producto'], '¿Está realmente seguro de eliminar este producto? También se eliminarán todas las ventas e inventarios asociados con este producto.');">
                         <span class="btn btn-small btn-danger"> 
                             <i class="icon-remove bigger-120">&nbsp;Eliminar</i> 
                         </span>

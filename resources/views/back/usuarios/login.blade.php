@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Inicio de sesión - Sistema de inventario</title>
+		<title>Inicio de sesión | Panel OGM</title>
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!--basic styles-->
@@ -36,7 +36,7 @@
 								<div class="center">
 									<h1>
 										<i class="icon-book green"></i>
-										<span class="white">Sistema de inventario</span>
+										<span class="white">Panel OGM</span>
 									</h1>
 								</div>
 							</div>

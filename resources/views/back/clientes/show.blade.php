@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Datos del cliente | Sistema de inventario</title>
+    <title>Datos del cliente | Panel OGM</title>
 @stop
 
 @section('contenido')
@@ -43,12 +43,14 @@
                             <i class="icon-pencil bigger-120">&nbsp;Editar</i> 
                         </span>
                     </a>
+                    {{--
                     &nbsp;
                     <a href="javascript:{}" class="tooltip-error borrar" data-rel="tooltip" objeto="{{$cliente->id}}" style="text-decoration:none;" onclick="return confirmSubmit(document.forms['form-eliminar-cliente'], '¿Está realmente seguro de eliminar este cliente?');">
                         <span class="btn btn-small btn-danger"> 
                             <i class="icon-remove bigger-120">&nbsp;Eliminar</i> 
                         </span>
                     </a>
+                    --}}
                 </td>
             </tr>
         </tbody>
