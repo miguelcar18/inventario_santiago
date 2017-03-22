@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Datos del producto | Panel OGM</title>
+    <title>Datos del producto | Panel AGM</title>
 @stop
 
 @section('contenido')
@@ -15,9 +15,9 @@
                     <div class="span6">
                         <span class="profile-picture" id="cambiante">
                             @if($producto->path == '')
-                            <img id="avatar2" alt="{{ $producto->nombre }} foto" src="{{ asset('uploads/productos/unfile.png') }}" />
+                            <img id="avatar2" alt="{{ $producto->nombre }} foto" src="{{ asset('uploads/productos/unfile.png') }}" height="250px" width="auto" />
                             @else
-                            <img id="avatar2" alt="{{ $producto->nombre }} foto" src="{{ asset('uploads/productos/'.$producto->path) }}" />
+                            <img id="avatar2" alt="{{ $producto->nombre }} foto" src="{{ asset('uploads/productos/'.$producto->path) }}" height="250px" width="auto" />
                             @endif
                         </span>
                     </div>

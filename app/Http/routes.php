@@ -14,14 +14,17 @@
 /***********************Inicio***********************/
 Route::get('/', ['as' => 'principal', 'uses' => 'front\FrontController@index']);
 Route::get('/nosotros', ['as' => 'nosotros', 'uses' => 'front\FrontController@nosotros']);
+Route::get('/contacto', ['as' => 'contacto', 'uses' => 'front\FrontController@contacto']);
+Route::get('/productos', ['as' => 'productos', 'uses' => 'front\FrontController@productos']);
 
 /***********************Login y User***********************/
 Route::resource('login', 'back\LoginController');
 Route::get('logout', ['as' => 'logout', 'uses' => 'back\LoginController@logout']);
-Route::get('password/email', 'Auth\PasswordController@getEmail');
-Route::post('password/email', 'Auth\PasswordController@postEmail');
-Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
-Route::post('password/reset', 'Auth\PasswordController@postReset');
+Route::get('restaurar-contrasena', ['as' => 'restaurarContrasena', 'uses' =>'back\LoginController@changePassword']);
+Route::post('postChangePassword', ['as' => 'postChangePassword', 'uses' =>'back\LoginController@postChangePassword']);
+Route::get('/selectUsuario/{id}', ['as' => 'selectusuario', 'uses' => 'back\LoginController@preguntaUsuarioSeleccionado']);
+Route::get('/nueva-contrasena/{id}', ['as' => 'nuevaContrasena', 'uses' =>'back\LoginController@nuevoPassword']);
+Route::post('postNewPassword', ['as' => 'postNewPassword', 'uses' =>'back\LoginController@postNewPassword']);
 
 Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::get('/', ['as' => 'dashboard', 'uses' => 'back\BackController@index']);
@@ -35,4 +38,6 @@ Route::group(['before' => 'auth', 'prefix' => 'dashboard'], function () {
 	Route::resource('inventario', 'back\InventarioController');
 	Route::resource('ventas', 'back\VentaController');
 	Route::get('/selectProducto/{id}', ['as' => 'selectproducto', 'uses' => 'back\InventarioController@totalProductoSeleccionado']);
+	Route::get('/reportes', ['as' => 'reportes', 'uses' => 'back\ReporteController@consulta']);
+	Route::post('reportes/resultados', ['as' => 'consultar.store', 'uses' => 'back\ReporteController@buscar']);
 });

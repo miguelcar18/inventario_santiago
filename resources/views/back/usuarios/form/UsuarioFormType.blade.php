@@ -46,3 +46,19 @@
 		</div>
 	</div>
 </div>
+<div class="control-group">
+	<label class="control-label" for="pregunta">Pregunta secreta:</label>
+	<div class="controls">
+		<div class="span12">
+			{!! Form::text('pregunta', null, ['id' => 'pregunta', 'class' => 'span6', 'placeholder' => 'Pregunta secreta', 'required' => true]) !!}
+		</div>
+	</div>
+</div>
+<div class="control-group">
+	<label class="control-label" for="respuesta">Respuesta secreta:</label>
+	<div class="controls">
+		<div class="span12">
+			{!! Form::text('respuesta', null, ['id' => 'respuesta', 'class' => 'span6', 'placeholder' => 'Respuesta secreta', 'required' => true]) !!}
+		</div>
+	</div>
+</div>

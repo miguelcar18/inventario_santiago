@@ -18,6 +18,8 @@ class UsuariosSeeder extends Seeder
             'email'         => 'miguelcar18@gmail.com',
             'password'      => bcrypt('1234'),
             'path'          => '2016-09-18 05:26:2225miguel.jpeg',
+            'pregunta'      => 'Nombre de usuario',
+            'respuesta'     => 'miguelcar18',
             'created_at'    => date('Y-m-d H:m:s'),
             'updated_at'    => date('Y-m-d H:m:s')
         ]);

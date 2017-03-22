@@ -79,7 +79,9 @@ class UsuarioController extends Controller
                 'name'      => $request['name'],
                 'email'     => $request['email'], 
                 'password'  => bcrypt($request['password']), 
-                'path'      => $nombre
+                'path'      => $nombre, 
+                'pregunta'  => $request['pregunta'], 
+                'respuesta' => $request['respuesta']
             ]);
             
             return response()->json([
@@ -164,7 +166,9 @@ class UsuarioController extends Controller
                     'username'  => $request['username'], 
                     'name'      => $request['name'],
                     'email'     => $request['email'], 
-                    'path'      => $nombre
+                    'path'      => $nombre, 
+                    'pregunta'  => $request['pregunta'], 
+                    'respuesta' => $request['respuesta']
                     ]);
                 $this->user->save();
 

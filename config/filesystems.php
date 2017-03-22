@@ -50,12 +50,12 @@ return [
 
         'usuarios' => [
             'driver' => 'local',
-            'root' => public_path().'/uploads/usuarios',
+            'root' => base_path().'/uploads/usuarios',
         ],
 
         'productos' => [
             'driver' => 'local',
-            'root' => public_path().'/uploads/productos',
+            'root' => base_path().'/uploads/productos',
         ],
 
         'ftp' => [

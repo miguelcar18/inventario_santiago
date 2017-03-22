@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Editar venta | Panel OGM</title>
+    <title>Editar venta | Panel AGM</title>
 @stop
 
 @section('contenido')

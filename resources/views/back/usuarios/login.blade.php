@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Inicio de sesión | Panel OGM</title>
+		<title>Inicio de sesión | Panel AGM</title>
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!--basic styles-->
@@ -36,7 +36,7 @@
 								<div class="center">
 									<h1>
 										<i class="icon-book green"></i>
-										<span class="white">Panel OGM</span>
+										<span class="white">Panel AGM</span>
 									</h1>
 								</div>
 							</div>
@@ -76,7 +76,7 @@
 											</div><!--/widget-main-->
 											<div class="toolbar clearfix">
 												<div class="text-center">
-													<a href="#" class="forgot-password-link">
+													<a href="{{ URL::route('restaurarContrasena') }}" class="forgot-password-link">
 														Olvidé mi contraseña
 													</a>
 												</div>

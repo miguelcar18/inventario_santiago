@@ -48,46 +48,67 @@ class LoginController extends Controller
 
     public function changePassword()
     {
-        return view('users.change_password');
+        $usuarios = array('' => "Seleccione") + \DB::table('usuarios')->orderBy('name', 'asc')->lists('name','id');
+        return view('back.usuarios.olvidarContrasena', compact('usuarios'));
     }
 
-    public function postChangePassword(ChangePasswordRequest $request)
+    public function postChangePassword(Request $request)
     {
-        $validator = Validator::make(
-            $request->all(),
-            $request->rules(),
-            $request->messages()
-        );
-
-        if ($validator->valid()){
-            if($request->ajax())
+        if($request->ajax())
+        {
+        	$user = User::find($request['usuario']);
+            if($user->respuesta == $request['respuesta'])
             {
-                if(Auth::attempt(['password' => $request['password_actual']]))
-                {
-                    $user = User::find(Auth::user()->id);
-                    $user->fill([
-                        'password'   => bcrypt($request['password'])
-                    ]);
-                    $user->save();
-
-                    return response()->json([
-                        'message' => 'correcto'
-                    ]);
-                }
-                else
-                {
-                    return response()->json([
-                        'message' => 'error'
-                    ]);
-                }
+                return response()->json([
+                    'message' => 'correcto'
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'message' => 'error'
+                ]);
             }
         }
-
     }
 
     public function logout()
     {
         Auth::logout();
         return Redirect::route('login.index');
+    }
+
+    public function preguntaUsuarioSeleccionado(Request $request, $id) 
+    {
+        if($request->ajax()){
+            $usuarioSeleccionado = User::find($id);
+            return Response::json(array(
+                'correcto'      =>  true,
+                'valorPregunta' =>  $usuarioSeleccionado->pregunta
+            ));
+        }
+    }
+
+    public function nuevoPassword($id)
+    {
+    	$usuario = User::find($id);
+        return view('back.usuarios.nuevaContrasena', compact('usuario'));
+    }
+
+    public function postNewPassword(Request $request)
+    {
+        if($request->ajax())
+        {
+        	$user = User::find($request['idUsuario']);
+            $campos = [
+                'password'  => bcrypt($request['password']) 
+            ];
+            $user->fill($campos);
+            $user->save();
+
+            return response()->json([
+                'message' => 'correcto'
+            ]);
+        }
     }
 }

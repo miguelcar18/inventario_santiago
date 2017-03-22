@@ -112,7 +112,7 @@
 			</ul>
 		</li>
 		<li>
-			<a href="#">
+			<a href="{{ URL::route('reportes') }}">
 				<i class="icon-table"></i>
 				<span class="menu-text"> Reportes </span>
 			</a>

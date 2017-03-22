@@ -22,6 +22,7 @@
 		<link rel="stylesheet" href="{{ asset('back/assets/css/ace-responsive.min.css') }}" />
 		<link rel="stylesheet" href="{{ asset('back/assets/css/ace-skins.min.css') }}" />
 		<link rel="stylesheet" href="{{ asset('back/assets/css/jquery.gritter.css') }}" />
+		<link rel="stylesheet" href="{{ asset('back/assets/css/datepicker.css') }}" />
 		<!--[if lte IE 8]>
 		<link rel="stylesheet" href="{{ asset('back/assets/css/ace-ie.min.css') }}" />
 		<![endif]-->
@@ -71,6 +72,7 @@
 		<script src="{{ asset('back/assets/js/bootstrap.min.js') }}"></script>
 		<!--page specific plugin scripts-->
 		<script src="{{ asset('back/assets/js/jquery.gritter.min.js') }}"></script>
+		<script src="{{ asset('back/assets/js/date-time/bootstrap-datepicker.min.js') }}"></script>
 		<!--ace scripts-->
 		<script src="{{ asset('back/assets/js/jquery.validate.min.js') }}"></script>
 		<script src="{{ asset('back/assets/js/ace-elements.min.js') }}"></script>

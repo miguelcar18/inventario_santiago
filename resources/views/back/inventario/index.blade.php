@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Listado de registros | Panel OGM</title>
+    <title>Listado de registros | Panel AGM</title>
 @stop
 
 @section('contenido')

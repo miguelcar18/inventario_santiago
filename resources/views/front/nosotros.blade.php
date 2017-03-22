@@ -1,11 +1,11 @@
 @extends('front.layouts.base')
 
 @section('titulo')
-    <title>Nosotros | OGM Academia de Negocios Online</title>
+    <title>Nosotros | AGM Academia de Negocios Online</title>
 @stop
 
 @section('contenido')
-	<table width="656" border="0" align="center" background="{{ asset('front/imagenes_ogm/fondo para anuncios.jpg') }}" bgcolor="#FFFFFF">
+	<table width="656" border="0" align="center" background="{{ asset('front/images/fondo_para_anuncios.jpg') }}" bgcolor="#FFFFFF">
 		<tr>
 			<td></td>
 		</tr>
@@ -29,7 +29,7 @@
 								<tr>
 									<td>
 										<p align="justify" class="Estilo25">
-											<a href="area_herbalife.html" target="_blank" class="Estilo31">Misión:</a>
+											<a href="#" target="_blank" class="Estilo31">Misión:</a>
 											<span class="Estilo30">Llevar al público la mayor variedad  de productos alimenticios que verdaderamente nutra el cuerpo alejándolos de la  necesidad del consumo de alimentos cárnicos para que el consumidor de productos  Grupo Master alcance su máximo potencial biológico  goce de una salud plena</span>
 											<br />
 										</p>
@@ -37,7 +37,7 @@
 								</tr>
 								<tr>
 									<td>
-										<a href="area_herbalife.html" target="_blank">
+										<a href="#" target="_blank">
 											<strong>
 												<br />
 												<span class="Estilo27">Visión:</span>
@@ -49,7 +49,7 @@
 								<tr>
 									<td>
 										<p>
-											<a href="area_herbalife.html" target="_blank" class="Estilo27"><strong>Valores:</strong></a>
+											<a href="#" target="_blank" class="Estilo27"><strong>Valores:</strong></a>
 											<span class="Estilo29"> Nuestros valore se fundamentan en la filosofía del Factor  Alfa </span>
 										</p>
 									</td>
@@ -60,9 +60,9 @@
 					<tr>
 				        <td>
 				        	<p align="justify" class="Estilo18">
-				        		<img src="{{ asset('front/imagenes_ogm/anyi_negocios_ad_4.gif') }}" width="150" height="200" />
+				        		<img src="{{ asset('front/images/anyi_negocios_ad_4.gif') }}" width="150" height="200" />
 			        			<a href="#">
-			        				<img src="{{ asset('front/imagenes_ogm/filosofiafactor alfa .jpg') }}" alt="Filosofia factor alfa" width="390" height="201" longdesc="flosofia factor alfa" />
+			        				<img src="{{ asset('front/images/filosofiafactor_alfa.jpg') }}" alt="Filosofia factor alfa" width="390" height="201" longdesc="flosofia factor alfa" />
 		        				</a>
 	        				</p>
 			        	</td>

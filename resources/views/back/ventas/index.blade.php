@@ -1,7 +1,7 @@
 @extends('back.layouts.base')
 
 @section('titulo')
-    <title>Listado de ventas | Panel OGM</title>
+    <title>Listado de ventas | Panel AGM</title>
 @stop
 
 @section('contenido')
@@ -28,7 +28,7 @@
                         <a href="{{ URL::route('dashboard.ventas.show', $venta->id) }}" data-rel="tooltip" title="Mostrar {{ $venta->id }}" objeto="{{ $venta->id }}" style="text-decoration:none;"> 
                             <span class="btn btn-mini btn-info"> <i class="icon-eye-open bigger-120"></i> </span> 
                         </a>
-                        {{-- @if($venta->apartar == 1) --}}
+                        @if($venta->apartar == 1)
                         &nbsp;
                         <a href="{{ URL::route('dashboard.ventas.edit', $venta->id) }}" class="tooltip-success editar" data-rel="tooltip" title="Editar {{ $venta->id }}" objeto="{{ $venta->id }}" style="text-decoration:none;"> 
                             <span class="btn btn-mini btn-success"> <i class="icon-pencil bigger-120"></i> </span> 
@@ -37,7 +37,7 @@
                         <a href="#" data-id="{{ $venta->id }}" class="tooltip-error borrar" data-rel="tooltip" title="Eliminar {{ $venta->id }}" objeto="{{ $venta->id }}"> 
                             <span class="btn btn-mini btn-danger"> <i class="icon-remove bigger-120"></i> </span> 
                         </a>
-                        {{-- @endif --}}
+                        @endif 
                     </td>
                 </tr>
             @endforeach
